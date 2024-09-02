@@ -1,7 +1,7 @@
 on: [push]
 
 jobs:
-  hello_world_job:
+  retrieve_job:
     runs-on: ubuntu-latest
     name: Testing
     steps:
@@ -9,3 +9,7 @@ jobs:
       uses: actions/checkout@v4
     - id: foo
       uses: ./
+      with:
+        action: get
+        key: commit-sha
+        value: ${{ github.sha }}
