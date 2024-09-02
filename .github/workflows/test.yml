@@ -5,9 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Testing
     steps:
-    - name: checkout
-      uses: actions/checkout@v4
-    - id: foo
+    - name: test
       uses: ./
       with:
         action: get
