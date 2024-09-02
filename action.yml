@@ -1,15 +1,35 @@
-name: 'Hello Perl'
-description: 'Perl Github Action Template'
+name: Store/Retrieve value
+description: Single key/value store
 inputs:
-  template-input:  # Change this
-    description: 'What it is about'
-    required: false # or not
-    default: 'World'
+  action:
+    description: Get or set the value of a key
+    required: true
+    default: get
+  key:
+    description: name of key
+    required: true
+  value:
+    description: value assigned to the key
+    required: false
+outputs:
+  value:
+    description: Value of key if available and requested "get"
 runs:
   using: "composite"
   steps:
-    - uses: actions/checkout@v4
-    - run: print %ENV;
-      shell: perl {0}
-    - run: ${GITHUB_ACTION_PATH}/action.pl
-      shell: bash
+    - uses: actions/cache@v4
+      id: key-value-store
+      with:
+        path: ${{ inputs.key }}
+        key: ${{ inputs.key }}-store
+    - name: get value
+      if: inputs.action == "get"
+      env:
+        FILE_NAME: ${{inputs.key}}
+      run: echo "value=$(cat ${FILE_NAME})" > $GITHUB_OUTPUT
+    - name: set value
+      if: inputs.action == "set"
+      env:
+        VALUE: ${{inputs.value}}
+        FILE_NAME: ${{inputs.key}}
+      run: echo ${VALUE} > ${FILE_NAME}
