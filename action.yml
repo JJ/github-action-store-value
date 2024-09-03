@@ -17,7 +17,8 @@ outputs:
 runs:
   using: "composite"
   steps:
-    - uses: actions/cache@v4
+    - if: ${{ inputs.action == 'get' }}
+      uses: actions/cache/restore@v4
       id: key-value-store
       with:
         path: ${{ inputs.key }}
@@ -28,6 +29,13 @@ runs:
         FILE_NAME: ${{inputs.key}}
       run: echo "value=$(cat ${FILE_NAME})" >> "$GITHUB_OUTPUT"
       shell: bash
+    - if: ${{ inputs.action == 'set' }}
+      uses: actions/cache/save@v4
+      id: key-value-store
+      with:
+        path: ${{ inputs.key }}
+        key: ${{ inputs.key }}-store
+
     - name: set value
       if: ${{ inputs.action == 'set' }}
       env:
