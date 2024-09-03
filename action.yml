@@ -19,7 +19,7 @@ runs:
   steps:
     - if: ${{ inputs.action == 'get' }}
       uses: actions/cache/restore@v4
-      id: key-value-store
+      id: key-value-store-get
       with:
         path: ${{ inputs.key }}
         key: ${{ inputs.key }}-store
@@ -31,7 +31,7 @@ runs:
       shell: bash
     - if: ${{ inputs.action == 'set' }}
       uses: actions/cache/save@v4
-      id: key-value-store
+      id: key-value-store-set
       with:
         path: ${{ inputs.key }}
         key: ${{ inputs.key }}-store
