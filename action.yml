@@ -26,7 +26,7 @@ runs:
       if: ${{ inputs.action == 'get' }}
       env:
         FILE_NAME: ${{inputs.key}}
-      run: echo "value=$(cat ${FILE_NAME})" > $GITHUB_OUTPUT
+      run: ls &&  cat ${FILE_NAME} && echo "value=$(cat ${FILE_NAME})" > $GITHUB_OUTPUT
       shell: bash
     - name: set value
       if: ${{ inputs.action == 'set' }}
