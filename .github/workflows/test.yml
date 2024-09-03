@@ -5,6 +5,8 @@ jobs:
     runs-on: ubuntu-latest
     name: Testing
     steps:
+    - name: Checkout. Needs this to actually run it
+      uses: actions/checkout@v4
     - name: test
       uses: ./
       with:
