@@ -18,6 +18,8 @@ jobs:
       env:
         SHA: ${{ steps.get.outputs.value }}
       run: echo Value is ${SHA}
+    - name: Reset cache
+      run: rm commit-sha
     - name: Testing set
       uses: ./
       with:

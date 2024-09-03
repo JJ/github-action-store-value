@@ -35,7 +35,6 @@ runs:
       with:
         path: ${{ inputs.key }}
         key: ${{ inputs.key }}-store
-
     - name: set value
       if: ${{ inputs.action == 'set' }}
       env:
