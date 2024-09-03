@@ -29,12 +29,6 @@ runs:
         FILE_NAME: ${{inputs.key}}
       run: echo "value=$(cat ${FILE_NAME})" >> "$GITHUB_OUTPUT"
       shell: bash
-    - if: ${{ inputs.action == 'set' }}
-      uses: actions/cache/save@v4
-      id: key-value-store-set
-      with:
-        path: ${{ inputs.key }}
-        key: ${{ inputs.key }}-store
     - name: set value
       if: ${{ inputs.action == 'set' }}
       env:
@@ -42,3 +36,10 @@ runs:
         FILE_NAME: ${{inputs.key}}
       run: echo ${VALUE} > ${FILE_NAME}
       shell: bash
+    - if: ${{ inputs.action == 'set' }}
+      uses: actions/cache/save@v4
+      id: key-value-store-set
+      with:
+        path: ${{ inputs.key }}
+        key: ${{ inputs.key }}-store
+
