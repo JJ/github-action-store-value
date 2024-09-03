@@ -34,6 +34,7 @@ runs:
       env:
         VALUE: ${{inputs.value}}
         FILE_NAME: ${{inputs.key}}
+        GH_TOKEN: ${{ github.token }}
       run: gh cache delete ${FILE_NAME} && echo ${VALUE} > ${FILE_NAME}
       shell: bash
     - if: ${{ inputs.action == 'set' }}
