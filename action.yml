@@ -24,11 +24,16 @@ runs:
         path: ${{ inputs.key }}
         key: ${{ inputs.key }}-store
     - name: get value
+      id: get-value
       if: ${{ inputs.action == 'get' }}
       env:
         FILE_NAME: ${{inputs.key}}
       run: echo "value=$(cat ${FILE_NAME})" >> "$GITHUB_OUTPUT"
       shell: bash
+    - name: show value
+      shell: bash
+      env:
+        OUTPUTS: ${{ toJSON(steps.get-value.outputs)}}
     - name: set value
       if: ${{ inputs.action == 'set' }}
       env:
