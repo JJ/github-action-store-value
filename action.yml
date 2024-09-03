@@ -34,7 +34,7 @@ runs:
       env:
         VALUE: ${{inputs.value}}
         FILE_NAME: ${{inputs.key}}
-      run: echo ${VALUE} > ${FILE_NAME}
+      run: gh cache delete ${FILE_NAME} && echo ${VALUE} > ${FILE_NAME}
       shell: bash
     - if: ${{ inputs.action == 'set' }}
       uses: actions/cache/save@v4
