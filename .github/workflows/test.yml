@@ -14,10 +14,6 @@ jobs:
         action: get
         key: commit-sha
         value: ${{ github.sha }}
-    - name: show value
-      env:
-        OUTPUTS: ${{ toJSON(steps.get.outputs)}}
-      run: echo $OUTPUTS
     - name: Show last value
       env:
         SHA: ${{ steps.get.outputs.value }}
