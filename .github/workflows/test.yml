@@ -17,7 +17,7 @@ jobs:
     - name: Show last value
       env:
         SHA: ${{ steps.get.output.value }}
-      run: ls && echo Value is ${SHA}
+      run: echo Value is ${SHA}
     - name: Testing set
       uses: ./
       with:
