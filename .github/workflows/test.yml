@@ -16,7 +16,7 @@ jobs:
         value: ${{ github.sha }}
     - name: Show last value
       env:
-        SHA: ${{ steps.get.outputs.value }}
+        SHA: ${{ steps.get.outputs.* }}
       run: echo Value is ${SHA}
     - name: Testing set
       uses: ./
