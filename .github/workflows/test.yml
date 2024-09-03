@@ -8,11 +8,16 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
     - name: Testing get
+      id: get
       uses: ./
       with:
         action: get
         key: commit-sha
         value: ${{ github.sha }}
+    - name: Show last value
+      env:
+        SHA: ${{ steps.get.output.value }}
+      run: echo Value is ${SHA}
     - name: Testing set
       uses: ./
       with:
