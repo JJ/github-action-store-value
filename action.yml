@@ -23,13 +23,13 @@ runs:
         path: ${{ inputs.key }}
         key: ${{ inputs.key }}-store
     - name: get value
-      if: inputs.action == "get"
+      if: ${{ inputs.action == "get" }}
       env:
         FILE_NAME: ${{inputs.key}}
       run: echo "value=$(cat ${FILE_NAME})" > $GITHUB_OUTPUT
       shell: bash
     - name: set value
-      if: inputs.action == "set"
+      if: ${{ inputs.action == "set" }}
       env:
         VALUE: ${{inputs.value}}
         FILE_NAME: ${{inputs.key}}
