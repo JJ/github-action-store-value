@@ -29,7 +29,7 @@ runs:
       id: key-value-store-get
       with:
         path: ${{ inputs.key }}
-        key: ${{ inputs.key }}-store
+        key: ${{ inputs.key }}-${{input.value}}
     - name: get value
       id: get-value
       if: ${{ inputs.action == 'get' }}
