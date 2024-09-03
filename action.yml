@@ -14,6 +14,7 @@ inputs:
 outputs:
   value:
     description: Value of key if available and requested "get"
+    value: ${{ steps.get-value.outputs.value }}
 runs:
   using: "composite"
   steps:
